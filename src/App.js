@@ -1,4 +1,7 @@
 import React from 'react'
+// recetas parte 1 empezamos papi
+// está todo bien o ta cagado?
+
 
 function App() {
   return (
