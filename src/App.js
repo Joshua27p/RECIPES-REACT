@@ -1,13 +1,20 @@
-import React from 'react'
-// recetas parte 1 empezamos papi
-// está todo bien o ta cagado?
+import React from 'react' 
+import Navbar from './components/Navbar'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 
 function App() {
-  return (
-    <div className="App">
-     <p> Hello todo el mundo cpp</p>
-    </div>
+  return(
+     <>
+      <Router> 
+          <Navbar />
+          <Switch>
+            <Route path='/' exact />
+          </Switch>
+      </Router>
+
+      
+    </>
   );
 }
 
