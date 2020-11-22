@@ -1,107 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 // nos sirve para obtener la variable de la ruta
 import { useParams } from 'react-router-dom'
+import recipesAPI from '../../APIs/recipeAPI'
 const RecipeDetail = () => {
+
+  const [recipeDetail, setRecipeDetail] = useState({})
+
+  const getRecipeDetails = async () => {
+    const { data } = await recipesAPI.fetchRecipeDetail(id)
+    console.log(data)
+    setRecipeDetail(data.recipe)
+  }
+  useEffect(() => {
+    getRecipeDetails()
+  }, [])
+
+
   // destructuramos la variable y obtenemos el id de cada objeto
   const { id } = useParams()
   return (
-    <div>
-      <div className="max-w-screen-xl mx-auto">
-        <main className="mt-10">
 
-          <div className="mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative" style={{ height: '24em' }}>
-            <div className="absolute left-0 bottom-0 w-full h-full z-10"
-              style={{ backgroundImage: "linear-gradient(180deg,transparent,rgba(0,0,0,.7))" }}></div>
-            <img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" className="absolute left-0 top-0 w-full h-full z-0 object-cover" />
-            <div className="p-4 absolute bottom-0 left-0 z-20">
+    <div className="max-w-screen-xl mx-auto">
+      <main className="mt-10">
+        <div className="px-4 lg:px-0 mt-12 text-gray-700 max-w-screen-md mx-auto text-lg leading-relaxed">
+          <p className="pb-6">Ingredientes </p>
+          {recipeDetail.ingredients.map(ingredient => <p className="pb-6"> {ingredient}</p>)}
 
-              <h2 className="text-4xl font-semibold text-gray-100 leading-tight">
-                Title
-              </h2>
-              <div className="flex mt-3">
+          <p className="pb-6">Preparacion.</p>
 
-                <div>
-                  <p className="font-semibold text-gray-200 text-sm"> time </p>
-                  <p className="font-semibold text-gray-400 text-xs"> cost </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="px-4 lg:px-0 mt-12 text-gray-700 max-w-screen-md mx-auto text-lg leading-relaxed">
-            <p class="pb-6">Advantage old had otherwise sincerity dependent additions. It in adapted natural hastily is
-            justice. Six draw
-            you him full not mean evil. Prepare garrets it expense windows shewing do an. She projection advantages
-            resolution son indulgence. Part sure on no long life am at ever. In songs above he as drawn to. Gay was
-          outlived peculiar rendered led six.</p>
-
-            <p class="pb-6">Difficulty on insensible reasonable in. From as went he they. Preference themselves me as
-            thoroughly
-            partiality considered on in estimating. Middletons acceptance discovered projecting so is so or. In or
-            attachment inquietude remarkably comparison at an. Is surrounded prosperous stimulated am me discretion
-            expression. But truth being state can she china widow. Occasional preference fat remarkably now projecting
-            uncommonly dissimilar. Sentiments projection particular companions interested do at my delightful. Listening
-          newspaper in advantage frankness to concluded unwilling.</p>
-
-            <p class="pb-6">Adieus except say barton put feebly favour him. Entreaties unpleasant sufficient few pianoforte
-            discovered
-            uncommonly ask. Morning cousins amongst in mr weather do neither. Warmth object matter course active law
-            spring six. Pursuit showing tedious unknown winding see had man add. And park eyes too more him. Simple excuse
-            active had son wholly coming number add. Though all excuse ladies rather regard assure yet. If feelings so
-          prospect no as raptures quitting.</p>
-
-            <div class="border-l-4 border-gray-500 pl-4 mb-6 italic rounded">
-              Sportsman do offending supported extremity breakfast by listening. Decisively advantages nor
-              expression
-              unpleasing she led met. Estate was tended ten boy nearer seemed. As so seeing latter he should thirty whence.
-              Steepest speaking up attended it as. Made neat an on be gave show snug tore.
+          <div className="border-l-4 border-gray-500 pl-4 mb-6 italic rounded">
+            pasos para preparar el platisho
         </div>
+          {recipeDetail.method.map(prep => <p className="pb-6">{prep}</p>)}
 
-            <p class="pb-6">Exquisite cordially mr happiness of neglected distrusts. Boisterous impossible unaffected he me
-            everything.
-            Is fine loud deal an rent open give. Find upon and sent spot song son eyes. Do endeavor he differed carriage
-            is learning my graceful. Feel plan know is he like on pure. See burst found sir met think hopes are marry
-          among. Delightful remarkably new assistance saw literature mrs favourable.</p>
-
-            <h2 class="text-2xl text-gray-800 font-semibold mb-4 mt-4">Uneasy barton seeing remark happen his has</h2>
-
-            <p class="pb-6">Guest it he tears aware as. Make my no cold of need. He been past in by my hard. Warmly thrown
-            oh he common
-            future. Otherwise concealed favourite frankness on be at dashwoods defective at. Sympathize interested
-          simplicity at do projecting increasing terminated. As edward settle limits at in.</p>
+        </div>
+      </main>
 
 
-
-          </div>
-        </main>
-
-
-
-        <footer class="border-t mt-32 pt-12 pb-32 px-4 lg:px-0">
-          <div class="flex">
-
-            <div class="w-full md:w-1/3 lg:w-1/4">
-              <h6 class="font-semibold text-gray-700 mb-4">Company</h6>
-              <ul>
-                <li> <a href="" class="block text-gray-600 py-2">Team</a> </li>
-                <li> <a href="" class="block text-gray-600 py-2">About us</a> </li>
-                <li> <a href="" class="block text-gray-600 py-2">Press</a> </li>
-              </ul>
-            </div>
-
-            <div class="w-full md:w-1/3 lg:w-1/4">
-              <h6 class="font-semibold text-gray-700 mb-4">Content</h6>
-              <ul>
-                <li> <a href="" class="block text-gray-600 py-2">Blog</a> </li>
-                <li> <a href="" class="block text-gray-600 py-2">Privacy Policy</a> </li>
-                <li> <a href="" class="block text-gray-600 py-2">Terms & Conditions</a> </li>
-                <li> <a href="" class="block text-gray-600 py-2">Documentation</a> </li>
-              </ul>
-            </div>
-
-          </div>
-        </footer>
-      </div>
     </div>
   )
 }
