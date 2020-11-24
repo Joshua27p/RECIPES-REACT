@@ -1,3 +1,3 @@
-export const URL = "https://recipe-peruvian-rest.herokuapp.com/"
+export const URL = "https://recipe-peruvian-rest.herokuapp.com"
 
 

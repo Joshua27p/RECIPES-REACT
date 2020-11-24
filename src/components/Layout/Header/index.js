@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../Navbar';
 
-function Header() {
-
-
+function Header(props) {
 
   return (
     <div className="sticky top-0 bg-white">
@@ -26,7 +24,7 @@ function Header() {
           <input className="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full" placeholder="Search Recipe" type="text" />
           <button className="hidden">Submit</button>
         </form>
-        <Navbar />
+        <Navbar user={props.user} setUser={props.setUser}/>
       </header>
     </div>
   )
