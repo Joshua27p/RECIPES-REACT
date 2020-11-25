@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import authAPI from '../../APIs/authAPI';
 import { useHistory } from 'react-router-dom'
+import { UserContext } from '../../context'
 
-const Login = (props) => {
+const Login = () => {
   const history = useHistory();
   const [userName, setUserName ] = useState("");
   const [password, setPassword] = useState("");
+  const { setUser } = useContext(UserContext);
   
   const login = async (userName, password) =>{
     try {
       const log = await authAPI.login(userName, password)
-      console.log(log.data.user[0]);
+      // console.log(log.data.user[0]);
       const logStringy = JSON.stringify(log.data.user[0])
       localStorage.setItem('user', logStringy)
       history.push('/')
-      props.setUser(logStringy)
+      setUser(logStringy)
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +42,7 @@ const Login = (props) => {
                           <input type="checkbox" name="remember" id="remember" className="mr-2" /> <label for="remember" className="text-sm text-grey-dark">Remember Me</label>
                             </div>
                           <div className="flex flex-col mt-8">
-                            <button onClick={()=> login(userName, password)} type="button" className="bg-black-100 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded">
+                            <button onClick={()=> login(userName, password)} type="button" className="w-full text-center py-3 rounded bg-green-400 text-white hover:bg-green-dark focus:outline-none my-1">
                               Login
                                 </button>
                           </div>

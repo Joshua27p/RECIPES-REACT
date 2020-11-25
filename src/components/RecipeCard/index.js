@@ -1,10 +1,16 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import myRecipesAPI from '../../APIs/myrecipesAPI';
 // el hook useHistory te bota un objeto que sirve para navegar en este caso para ir a la ruta de los ID
 const RecipeCard = (props) => {
   const history = useHistory();
   const user = localStorage.getItem('user');
-  console.log(JSON.parse(user));
+  const userParse = JSON.parse(user)
+  
+  const handleClick = async e => {
+    e.stopPropagation();
+    const  storeRecipes = await myRecipesAPI.postRecipe(userParse.userId, props.recipeId)
+  }
 
   return (
     //onCLick tieen que ir con un callback function (es recomendable utilizar los temple string para hacer el llamdo de la propiedad)
@@ -16,9 +22,56 @@ const RecipeCard = (props) => {
         <div className="flex items-center px-3 py-3 bg-gray-900">
         {/* Este solo tiene que aparecer cuando lo grabe en my recipes */}
         
-        {user?<svg  style={{ cursor: 'pointer'  }} className="h-6 w-6 fill-current text-white" version="1.1" xmlns="http://www.w3.org/2000/svg"   x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000">
-      <g><path d="M500,10C229.4,10,10,229.4,10,500c0,270.6,219.4,490,490,490c270.6,0,490-219.4,490-490C990,229.4,770.6,10,500,10z M343.8,414.8c2.1-7.5,9.4-11.2,21.8-11.2c6.8,0.4,16,0.3,27.6-0.3c11.5-0.6,21.1-1,28.8-1c8.5,0,13.9-2.6,16-7.7c2.1-5.1,3.2-12,3.2-20.5c0-9.4-0.1-19.8-0.3-31.1c-0.2-11.3-0.3-23-0.3-34.9c0-12-0.1-23.7-0.3-35.2c-0.2-11.5-0.3-22.2-0.3-32.1c0-4.3,0.3-8.8,1-13.5c0.6-4.7,2.1-9,4.5-12.8c2.3-3.9,5.8-7.1,10.3-9.6c4.5-2.6,10.6-3.8,18.3-3.8c9,0,17.2-0.1,24.7-0.3c7.5-0.2,16.1-0.3,26-0.3c14.1,0,23.6,3.3,28.5,9.9c4.9,6.6,7.6,17.2,8,31.7v25c0,9.8,0.1,20.3,0.3,31.4c0.2,11.1,0.3,22.2,0.3,33.3v30.1c0,12.4,1.3,22.3,3.8,29.8c2.6,7.5,8.3,11,17.3,10.6c6.4,0,14.2,0.2,23.4,0.6c9.2,0.4,17.2,0.6,24,0.6c11.5,0,18.9,3.1,22.1,9.3c3.2,6.2,1,14.2-6.7,24c-8.1,10.3-17.5,22.6-28.2,37.2c-10.7,14.5-21.7,29.6-33,45.2c-11.3,15.6-22.4,30.8-33.3,45.5c-10.9,14.7-20.6,27.5-29.2,38.1c-7.7,9.8-15.1,14.9-22.1,15.1c-7.1,0.2-14.4-4.4-22.1-13.8c-8.1-9.4-17.4-21.2-27.9-35.3c-10.5-14.1-21.3-28.6-32.4-43.6c-11.1-15-22.1-29.7-33-44.2c-10.9-14.5-20.6-27.1-29.2-37.8C345.5,431.7,341.6,422.2,343.8,414.8z M798.5,751.9c-3.6,9.2-9.3,17.3-17,24.4c-7.7,7.1-17.1,12.6-28.2,16.7c-11.1,4-23.1,6.1-35.9,6.1c-80.8,0.4-153,0.6-216.6,0.6H282.9c-15.4,0-29-2.8-40.7-8.3c-11.7-5.6-21.2-12.4-28.2-20.5c-7.1-8.1-11.8-17-14.1-26.6c-2.4-9.6-2-18.3,1-26c2.6-6,5.1-12.2,7.7-18.6c2.1-5.5,4.7-11.9,7.7-18.9c3-7.1,6.2-14.2,9.6-21.5l24.4-59h73.1l-27.6,80.8h412.8l-27.6-80.8h69.9c9,21.8,17.1,41.5,24.4,59c3,7.7,6,15.2,9,22.4c3,7.3,5.7,13.8,8,19.6c2.4,5.8,4.3,10.7,5.8,14.7c1.5,4.1,2.2,6.3,2.2,6.7C802.7,733,802.1,742.7,798.5,751.9z"/><path d="M477.7,604.2"/></g>
-  </svg>: null}  
+        {user? <div onClick={(e) => handleClick(e) }>
+          <svg className="text-white h-6 w-6 fill-current" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"   x="0px" y="0px"
+	 viewBox="0 0 512 512" style={{enableBackground:"new 0 0 512 512", cursor:"pointer"}}  >
+<g>
+	<g>
+		<path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341
+			c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z
+			"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318
+			c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83
+			s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg> </div>
+: null}  
+
         <div className="flex ml-12">
     
           <h1 className="mx-3 text-white font-semibold text-lg"> {props.spendTime} mins </h1>

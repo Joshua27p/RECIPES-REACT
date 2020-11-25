@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../Navbar';
 
-function Header(props) {
+function Header() {
 
   return (
     <div className="sticky top-0 bg-white">
@@ -24,7 +24,7 @@ function Header(props) {
           <input className="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full" placeholder="Search Recipe" type="text" />
           <button className="hidden">Submit</button>
         </form>
-        <Navbar user={props.user} setUser={props.setUser}/>
+        <Navbar/>
       </header>
     </div>
   )

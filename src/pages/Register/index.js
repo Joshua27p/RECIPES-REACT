@@ -1,6 +1,26 @@
-import React from 'react'
-
+import React, { useContext, useState } from 'react'
+import authAPI from '../../APIs/authAPI';
+import { useHistory } from 'react-router-dom'
+import { UserContext } from '../../context'
 const Register = () => {
+  const history = useHistory();
+  const [userName, setUserName ] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("")
+  const { setUser } = useContext(UserContext);
+
+  const register = async (userName, password, name) => {
+    try {
+      const reg = await authAPI.register(userName, password, name)
+      const log = await authAPI.login(userName, password)
+      const logStringy = JSON.stringify(log.data.user[0])
+      localStorage.setItem('user', logStringy)
+      history.push('/')
+      setUser(logStringy)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div>
     <div class="bg-green-100 h-screen w-screen ">
@@ -11,32 +31,33 @@ const Register = () => {
               <h1 class="text-4xl text-center font-bold text-red-400">Registration</h1>
               <div class="w-full mt-4">
                 <form class="form-horizontal w-3/4 mx-auto" method="POST" action="#">
-                <input
+                <input  onChange={e => setName(e.target.value)}
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="fullname"
                         placeholder="Full Name" />
 
-                    <input
+                    <input onChange={e => setUserName(e.target.value)}
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="email"
                         placeholder="Email" />
 
-                    <input
+                    <input onChange={e => setPassword(e.target.value)}
                         type="password"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="password"
                         placeholder="Password" />
                     <input
                         type="password"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="confirm_password"
                         placeholder="Confirm Password" />
                       </form>
                       <button
+                        onClick={()=> register(userName, password, name)}
                         type="submit"
-                        class="w-full text-center py-3 rounded bg-green-400 text-white hover:bg-green-dark focus:outline-none my-1"
+                        className="w-full text-center py-3 rounded bg-green-400 text-white hover:bg-green-dark focus:outline-none my-1"
                     >Create Account </button>
                     </div>
                   </div>

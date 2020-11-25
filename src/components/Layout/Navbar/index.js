@@ -1,43 +1,45 @@
-// import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../../context';
 
-function Navbar(props) {
+function Navbar() {
   //const user = localStorage.getItem('user')
-  console.log('props.user', props.user);
+  const { setUser, user } = useContext(UserContext)
+  
   return (
     <nav>
       <ul className="list-reset md:flex md:items-center">
-        {props.user?null : <Link to="/login">
+        {user?null : <Link to="/login">
           <li className="md:ml-4">
             <a className="block no-underline  group-hover: py-2 text-red-300 font-bold hover:text-red-500 md:border-none md:p-0" href="/#">
             LOGIN
           </a>
           </li>
         </Link>}
-        {props.user && 
+        {user && 
         <li onClick={()=>{
            localStorage.removeItem('user');
-           props.setUser(null)
+           setUser(null)
         }} className="md:ml-4">
           <a className="block no-underline  group-hover: py-2 text-red-300 font-bold hover:text-red-500 md:border-none md:p-0" href="/#">
             LOGOUT
           </a>
         </li>
         }
-        <Link to="/register">
+        {user? null :<Link to="/register">
           <li className="md:ml-4">
              <a className="border-t block no-underline    py-2 text-red-300 font-bold hover:text-red-500 md:border-none md:p-0" href="/#">
               REGISTER
              </a>
           </li>
-        </Link>
-        <Link>
+        </Link>}
+        {user?<Link to="/my-recipes">
           <li className="md:ml-4">
              <a className="border-t block no-underline  py-2 text-red-300 font-bold hover:text-red-500 md:border-none md:p-0" href="/#">
               MY RECIPES
              </a>
           </li>
-        </Link>
+        </Link>: null}
       </ul>
     </nav>
   )

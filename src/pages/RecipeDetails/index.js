@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 // nos sirve para obtener la variable de la ruta
 import { useParams } from 'react-router-dom'
 import recipesAPI from '../../APIs/recipeAPI'
+
 const RecipeDetail = () => {
 
   const [recipeDetail, setRecipeDetail] = useState({})
