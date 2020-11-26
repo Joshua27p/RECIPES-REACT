@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/recipesperu/static/css/main.216b574f.chunk.css",
+    "main.js": "/recipesperu/static/js/main.8303114e.chunk.js",
+    "main.js.map": "/recipesperu/static/js/main.8303114e.chunk.js.map",
+    "runtime-main.js": "/recipesperu/static/js/runtime-main.bb405281.js",
+    "runtime-main.js.map": "/recipesperu/static/js/runtime-main.bb405281.js.map",
+    "static/js/2.de6d4172.chunk.js": "/recipesperu/static/js/2.de6d4172.chunk.js",
+    "static/js/2.de6d4172.chunk.js.map": "/recipesperu/static/js/2.de6d4172.chunk.js.map",
+    "index.html": "/recipesperu/index.html",
+    "static/css/main.216b574f.chunk.css.map": "/recipesperu/static/css/main.216b574f.chunk.css.map",
+    "static/js/2.de6d4172.chunk.js.LICENSE.txt": "/recipesperu/static/js/2.de6d4172.chunk.js.LICENSE.txt",
+    "static/media/wallpaper.b32894a3.jpeg": "/recipesperu/static/media/wallpaper.b32894a3.jpeg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bb405281.js",
+    "static/js/2.de6d4172.chunk.js",
+    "static/css/main.216b574f.chunk.css",
+    "static/js/main.8303114e.chunk.js"
+  ]
+}
