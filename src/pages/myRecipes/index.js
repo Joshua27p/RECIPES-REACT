@@ -23,8 +23,8 @@ import { UserContext } from '../../context';
   }, [])
 
   return (
-    <div className='container'>
-        <div>
+    <div classname='container'>
+        <div className='flex'>
           {myRecipeStorage.map((myRecipe)=>(<RecipeCard key={myRecipe.recipeId} {...myRecipe} />) )}        
         </div> 
 

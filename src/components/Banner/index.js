@@ -1,6 +1,6 @@
 import React from 'react';
 import BannerJPG from '../../assets/images/wallpaper.jpeg'
-
+// el componente banner solo almacena un background que se mostrara en el home
 const Banner = () => {
   return (
     <div >

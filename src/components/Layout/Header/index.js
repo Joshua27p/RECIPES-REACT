@@ -1,4 +1,5 @@
 import React from 'react';
+// utilizamos Link para que al momento de hacer click en nuestros a nos redireccionen, ya sea en home/login/register/myrecipes
 import { Link } from 'react-router-dom';
 import Navbar from '../Navbar';
 
