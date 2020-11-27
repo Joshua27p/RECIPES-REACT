@@ -10,7 +10,7 @@ const RecipeDetail = () => {
 
   const getRecipeDetails = async () => {
     // recipeDetail = {}
-    const { data } =g await recipesAPI.fetchRecipeDetail(id)
+    const { data } = await recipesAPI.fetchRecipeDetail(id)
     //
     console.log(data)
     setRecipeDetail(data.recipe)

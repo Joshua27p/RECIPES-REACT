@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 // utilizamos Link para que al momento de hacer click en nuestros a nos redireccionen, ya sea en home/login/register/myrecipes
 import { Link } from 'react-router-dom';
+import { SearchContext } from '../../../context';
 import Navbar from '../Navbar';
+ 
+ 
 
 function Header() {
+
+  const { valueSearch, setValueSearch } = useContext(SearchContext)
+   
+  const handleSearch = (e) => {
+    setValueSearch(e)
+  }
 
   return (
     <div className="sticky top-0 bg-white">
@@ -22,7 +31,8 @@ function Header() {
         </Link>
         <form className="mb-4 w-full md:mb-0 md:w-1/4">
           <label className="hidden" for="search-form">Search</label>
-          <input className="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full" placeholder="Search Recipe" type="text" />
+          <input value={valueSearch} onChange={ e => handleSearch(e.target.value)}
+          className="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full" placeholder="Search Recipe" type="text" />
           <button className="hidden">Submit</button>
         </form>
         <Navbar/>

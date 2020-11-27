@@ -7,12 +7,15 @@ import Login from './pages/Login';
 import MyRecipes from './pages/myRecipes'
 import RecipeDetail from './pages/RecipeDetails';
 import { UserContext } from './context'
+import { SearchContext } from './context'
 
 function App() {
-  const [user, setUser] = useState(localStorage.getItem('user'))
+  const [user, setUser] = useState(localStorage.getItem('user'));
+  const [valueSearch, setValueSearch] =  useState("")
 
   return (
     <UserContext.Provider value={{ user, setUser }} >
+     <SearchContext.Provider value={{ valueSearch, setValueSearch }} >
       <div className='md:container md:mx-auto'>
         <Router>
           <Header />
@@ -26,7 +29,9 @@ function App() {
           </Switch>
         </Router>
       </div>
+    </SearchContext.Provider>
     </UserContext.Provider>
+    
   )
 }
 
