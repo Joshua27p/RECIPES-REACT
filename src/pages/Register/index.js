@@ -2,27 +2,36 @@ import React, { useContext, useState } from 'react'
 import authAPI from '../../APIs/authAPI';
 import { useHistory } from 'react-router-dom'
 import { UserContext } from '../../context'
- 
+
 
 const Register = () => {
-   
+
 
   const history = useHistory();
   const [userName, setUserName ] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const { setUser } = useContext(UserContext);
 
   const register = async (userName, password, name) => {
     try {
-      const reg = await authAPI.register(userName, password, name)
-      const log = await authAPI.login(userName, password)
-      const logStringy = JSON.stringify(log.data.user[0])
-      localStorage.setItem('user', logStringy)
-      history.push('/')
-      setUser(logStringy)
+      if( /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/.test(name)
+      && password.length >= 6
+      && confirmPassword === password
+      && /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(userName)){
+         const reg = await authAPI.register(userName, password, name)
+         const log = await authAPI.login(userName, password)
+         const logStringy = JSON.stringify(log.data.user[0])
+         localStorage.setItem('user', logStringy)
+         history.push('/')
+         setUser(logStringy)
+      }else{
+        alert("posible errors : Email invalid, password less than 6 , userName invalid, confirmpassword equal to password ")
+      }
     } catch (error) {
       console.log(error)
+      alert("Usuario ya existe")
     }
   }
   return (
@@ -36,11 +45,11 @@ const Register = () => {
               <div className="w-full mt-4">
       <form className="form-horizontal w-3/4 mx-auto" method="POST" action="#">
         <input  onChange={e => setName(e.target.value)}
-         
+
         name="name"
         type="text"
-        placeholder="Full Name" 
-        className="block border border-grey-light w-full p-3 rounded mb-4" 
+        placeholder="Full Name"
+        className="block border border-grey-light w-full p-3 rounded mb-4"
          />
         <input onChange={e => setUserName(e.target.value)}
           type="text"
@@ -54,12 +63,13 @@ const Register = () => {
            name="password"
            placeholder="Password" />
         <input
+           onChange={e=> setConfirmPassword(e.target.value)}
            type="password"
            className="block border border-grey-light w-full p-3 rounded mb-4"
            name="confirm_password"
            placeholder="Confirm Password" />
         </form>
-                    
+
                       <button
                         onClick={()=> register(userName, password, name)}
                         type="submit"
@@ -76,8 +86,8 @@ const Register = () => {
 
         </div>
   )
-                    
-                    
+
+
 }
 
 export default Register
