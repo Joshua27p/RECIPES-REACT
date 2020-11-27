@@ -9,7 +9,7 @@ const RecipeCard = (props) => {
   const user = localStorage.getItem('user');
   //al momento de obtener user este viene como un string y lo necesiamos en su forma normal, es por eso que utilizamos JSOM.parse()
   const userParse = JSON.parse(user)
-  
+
   //creamos la funcion que ira en onClick para 1 guardar las recetas con el postRecipe al hacerle click y no nos redireccione //a recipe deetail
   const handleClick = async e => {
     // como el evento onClick padre se come al children  es necesario utilizar el evento e.stopPropagation para que no le afecte
@@ -23,10 +23,10 @@ const RecipeCard = (props) => {
     <div  onClick={() => history.push(`/recipe-detail/${props.recipeId}`)}
       className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4 m-2">
       <div>
-        <img  style={{ cursor: 'pointer' }} className="w-1/2 md:w-full h-56 object-cover object-center" src={props.img} alt="avatar" />        
+        <img  style={{ cursor: 'pointer' }} className="w-1/2 md:w-full h-56 object-cover object-center" src={props.img} alt="avatar" />
         <div className="flex md:space-x-1 px-2 py-1.5 bg-gray-800">
         {/* Este solo tiene que aparecer cuando lo grabe en my recipes */}
-       
+
         {user? <div onClick={(e) => handleClick(e) }>
           <svg className="text-white h-6 w-6 fill-current hover:text-green-500" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"   x="0px" y="0px"
 	 viewBox="0 0 512 512" style={{enableBackground:"new 0 0 512 512", cursor:"pointer"}}  >
@@ -75,10 +75,10 @@ const RecipeCard = (props) => {
 <g>
 </g>
 </svg> </div>
-: null}  
+: null}
 
         <div className="flex ml-12">
-    
+
           <h1 className="mx-3 text-white font-semibold text-lg"> {props.spendTime} mins </h1>
         </div>
         </div>
