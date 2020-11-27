@@ -14,73 +14,73 @@ const RecipeCard = (props) => {
   const handleClick = async e => {
     // como el evento onClick padre se come al children  es necesario utilizar el evento e.stopPropagation para que no le afecte
     e.stopPropagation();
-    const  storeRecipes = await myRecipesAPI.postRecipe(userParse.userId, props.recipeId)
+    const storeRecipes = await myRecipesAPI.postRecipe(userParse.userId, props.recipeId)
   }
 
   return (
     //onCLick tieen que ir con un callback function (es recomendable utilizar los temple string para hacer el llamdo de la propiedad)
     //push nos sirve para ir a una ruta especifica
-    <div  onClick={() => history.push(`/recipe-detail/${props.recipeId}`)}
+    <div onClick={() => history.push(`/recipe-detail/${props.recipeId}`)}
       className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4 m-2">
       <div>
-        <img  style={{ cursor: 'pointer' }} className="w-1/2 md:w-full h-56 object-cover object-center" src={props.img} alt="avatar" />
+        <img style={{ cursor: 'pointer' }} className="w-full md:w-full h-56 object-cover object-center" src={props.img} alt="avatar" />
         <div className="flex md:space-x-1 px-2 py-1.5 bg-gray-800">
-        {/* Este solo tiene que aparecer cuando lo grabe en my recipes */}
+          {/* Este solo tiene que aparecer cuando lo grabe en my recipes */}
 
-        {user? <div onClick={(e) => handleClick(e) }>
-          <svg className="text-white h-6 w-6 fill-current hover:text-green-500" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"   x="0px" y="0px"
-	 viewBox="0 0 512 512" style={{enableBackground:"new 0 0 512 512", cursor:"pointer"}}  >
-<g>
-	<g>
-		<path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341
+          {user ? <div onClick={(e) => handleClick(e)}>
+            <svg className="text-white h-6 w-6 fill-current hover:text-green-500" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+              viewBox="0 0 512 512" style={{ enableBackground: "new 0 0 512 512", cursor: "pointer" }}  >
+              <g>
+                <g>
+                  <path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341
 			c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659S472.341,136.705,472.341,256S375.295,472.341,256,472.341z
 			"/>
-	</g>
-</g>
-<g>
-	<g>
-		<path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path d="M355.148,234.386H275.83v-79.318c0-10.946-8.864-19.83-19.83-19.83s-19.83,8.884-19.83,19.83v79.318h-79.318
 			c-10.966,0-19.83,8.884-19.83,19.83s8.864,19.83,19.83,19.83h79.318v79.318c0,10.946,8.864,19.83,19.83,19.83
 			s19.83-8.884,19.83-19.83v-79.318h79.318c10.966,0,19.83-8.884,19.83-19.83S366.114,234.386,355.148,234.386z"/>
-	</g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-</svg> </div>
-: null}
+                </g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+            </svg> </div>
+            : null}
 
-        <div className="flex ml-12">
+          <div className="flex ml-12">
 
-          <h1 className="mx-3 text-white font-semibold text-lg"> {props.spendTime} mins </h1>
-        </div>
+            <h1 className="mx-3 text-white font-semibold text-lg"> {props.spendTime} mins </h1>
+          </div>
         </div>
         <div className="py-4 px-6">
           <h1 className="text-2xl font-semibold  text-center text-gray-800">{props.title}</h1>
